@@ -80,6 +80,10 @@ module.exports = {
       fontSize: {
         xxs: ['0.625rem', { lineHeight: '1rem' }],
       },
+      gridTemplateColumns: {
+        // Complex site-specific column configuration
+        'fit56': 'repeat(auto-fit, minmax(3.5rem, 1fr))',
+      },
       zIndex: {
         9999: '9999',
       },

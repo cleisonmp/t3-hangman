@@ -1,4 +1,4 @@
-export const englishWords = [
+const englishWords = [
   'able',
   'about',
   'absolute',
@@ -851,7 +851,7 @@ export const englishWords = [
   'yesterday',
   'young',
 ]
-export const portugueseWords = [
+const portugueseWords = [
   'aberto',
   'acabamento',
   'acampamento',
@@ -1643,3 +1643,12 @@ export const portugueseWords = [
   'vogal',
   'vontade',
 ]
+export type WordsLibrary = 'EN' | 'PT'
+
+export const getNewWord = (language: WordsLibrary, excludes?: string) => {
+  const words = language === 'EN' ? englishWords : portugueseWords
+  const wordsWithoutExcludes = words.filter((word) => word !== excludes)
+  const totalWordCount = wordsWithoutExcludes.length - 10
+
+  return wordsWithoutExcludes[Math.floor(Math.random() * totalWordCount)] ?? ''
+}
