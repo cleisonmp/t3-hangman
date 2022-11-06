@@ -1,6 +1,7 @@
 import { type NextPage } from 'next'
 import { useCallback, useEffect, useState } from 'react'
 import { Hangman } from '../components/common/hangman'
+import { HiddenWord } from '../components/common/hiddenWord'
 import { Keyboard } from '../components/common/keyboard'
 import { Seo } from '../components/utils/Seo'
 import type { WordsLibrary } from '../lib/words'
@@ -48,6 +49,11 @@ const Home: NextPage = () => {
           {isLoser && 'Nice Try - Refresh to try again'}
         </div>
         <Hangman numberOfGuesses={incorrectGuesses.length} />
+        <HiddenWord
+          wordToGuess={wordToGuess}
+          guessedLetters={correctGuesses}
+          reveal={isLoser}
+        />
         <Keyboard
           disabled={isWinner || isLoser}
           correctGuesses={correctGuesses}
