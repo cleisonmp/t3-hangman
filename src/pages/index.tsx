@@ -1,5 +1,6 @@
 import { type NextPage } from 'next'
 import { useCallback, useEffect, useState } from 'react'
+import { Hangman } from '../components/common/hangman'
 import { Keyboard } from '../components/common/keyboard'
 import { Seo } from '../components/utils/Seo'
 import type { WordsLibrary } from '../lib/words'
@@ -39,13 +40,14 @@ const Home: NextPage = () => {
   return (
     <>
       <Seo />
-      <main className='flex w-full flex-1 flex-col gap-4 p-4'>
+      <main className='mx-auto flex w-full max-w-4xl flex-1 flex-col items-center gap-4 p-4'>
         <h1 className=''>T3 app</h1>
         <p>{wordToGuess}</p>
         <div className='text-2xl'>
           {isWinner && 'Winner! - Refresh to try again'}
           {isLoser && 'Nice Try - Refresh to try again'}
         </div>
+        <Hangman numberOfGuesses={incorrectGuesses.length} />
         <Keyboard
           disabled={isWinner || isLoser}
           correctGuesses={correctGuesses}

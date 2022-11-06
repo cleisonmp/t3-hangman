@@ -47,7 +47,7 @@ export function Keyboard({
   }
 
   return (
-    <div className='grid grid-cols-fit56 gap-2'>
+    <div className='grid w-full grid-cols-fit56 gap-2'>
       {KEYS.map((key) => {
         const isCorrectGuess = correctGuesses.includes(key)
         const isIncorrectGuess = incorrectGuesses.includes(key) || disabled
