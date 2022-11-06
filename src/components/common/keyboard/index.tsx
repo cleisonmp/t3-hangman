@@ -50,8 +50,13 @@ export function Keyboard({
     <div className='grid w-full grid-cols-fit56 gap-2'>
       {KEYS.map((key) => {
         const isCorrectGuess = correctGuesses.includes(key)
-        const isIncorrectGuess = incorrectGuesses.includes(key) || disabled
+        const isIncorrectGuess = incorrectGuesses.includes(key)
         const isDisabled = isIncorrectGuess || isCorrectGuess || disabled
+        const letterBg = isCorrectGuess
+          ? 'bg-app-primary '
+          : isIncorrectGuess
+          ? 'bg-app-error '
+          : 'bg-transparent'
 
         return (
           <button
@@ -60,8 +65,8 @@ export function Keyboard({
             ${classNames(
               { 'hover:text-app-info hover:brightness-125': !isDisabled },
               { 'text-app-secondary': !isIncorrectGuess && !isCorrectGuess }, //default
-              { 'text-app-primary': isCorrectGuess },
-              { 'text-app-textDisabled': isIncorrectGuess },
+              letterBg,
+              { 'text-app-textDisabled': isDisabled },
             )}`}
             disabled={isDisabled}
             key={key}
