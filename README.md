@@ -6,7 +6,7 @@
 
 <h3>👁‍🗨 Live demo</h3>
 
-Check live demonstration [here](https://cleisonmp-hangman.vercel.app/)
+Check live demonstration [here](https://the-hangman-game.vercel.app/)
 
 ## 📦🔧
 
