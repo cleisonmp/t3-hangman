@@ -61,7 +61,7 @@ export function Keyboard({
         return (
           <button
             onClick={() => handleLetterClick(key)}
-            className={`w-full select-none border-2 border-app-border bg-transparent p-2 text-4xl font-bold uppercase transition-all 
+            className={`w-full select-none border-2 border-app-border p-2 text-4xl font-bold uppercase transition-all 
             ${classNames(
               { 'hover:text-app-info hover:brightness-125': !isDisabled },
               { 'text-app-secondary': !isIncorrectGuess && !isCorrectGuess }, //default
