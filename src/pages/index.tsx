@@ -94,14 +94,15 @@ const Home: NextPage = () => {
             label='Reveal'
             Icon={FaUnlockAlt}
             handleClick={handleRevealWord}
-            disabled={isLoser}
+            disabled={isLoser || isWinner}
           />
         </div>
         <Hangman numberOfGuesses={incorrectGuesses.length} />
         <HiddenWord
           wordToGuess={wordToGuess}
           guessedLetters={correctGuesses}
-          reveal={isLoser}
+          isLoser={isLoser}
+          isWinner={isWinner}
         />
         <Keyboard
           disabled={isWinner || isLoser}
