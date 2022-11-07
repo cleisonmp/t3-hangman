@@ -1,3 +1,3 @@
 export const RightLeg = () => (
-  <div className='absolute top-55 -right-26 h-2 w-24 rotate-[60deg] bg-app-secondary' />
+  <div className='absolute top-48 -right-23 h-2 w-20 rotate-[60deg] bg-app-secondary sm:-right-26 sm:top-55 sm:w-24' />
 )

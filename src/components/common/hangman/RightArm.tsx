@@ -1,10 +1,3 @@
 export const RightArm = () => (
-  <div className='absolute -right-31 top-24 h-2 w-24 rotate-[-30deg] bg-app-secondary' />
+  <div className='absolute -right-24 top-20 h-2 w-18 rotate-[-30deg] bg-app-secondary sm:-right-31 sm:top-24 sm:w-24' />
 )
-
-/*style={{
-      top: '150px',
-      right: '-100px',
-      rotate: '-30deg',
-      transformOrigin: 'left bottom',
-    }}*/
