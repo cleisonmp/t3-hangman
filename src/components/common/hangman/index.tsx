@@ -20,7 +20,7 @@ const bodyParts = [
 
 export const Hangman = ({ numberOfGuesses }: HangmanProps) => {
   return (
-    <div className='relative select-none self-start'>
+    <div className='relative select-none self-start sm:self-center'>
       {bodyParts.map((BodyPart, index) => {
         if (index < numberOfGuesses) {
           return <BodyPart key={index} />
