@@ -59,14 +59,15 @@ const Seo = ({ ...props }: SeoProps) => {
 
   // TODO: EDIT BEFORE PUBLISHING
   const meta: SeoProps = {
-    title: 'Project Default SEO Title',
-    description: 'Project default seo description',
-    image: 'default-seo-image',
+    title: 'The Hangman Game',
+    description:
+      'A classic word game in which you must guess as many secret words as you can before time runs out!',
+    image: './og-image.png',
     type: 'website',
-    urlBasePath: 'https://projectdefaulturl.com',
+    urlBasePath: 'https://the-hangman-game.vercel.app/',
     customRobots: 'follow,index',
     twitterCardType: 'summary',
-    ogSiteName: 'Project Name',
+    ogSiteName: 'The Hangman Game',
     isCanonical: true,
     ...props,
   }
