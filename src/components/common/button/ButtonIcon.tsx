@@ -6,6 +6,7 @@ interface ButtonIconProps {
   Icon: IconType
   handleClick?: (event?: MouseEvent<HTMLButtonElement>) => void
   disabled?: boolean
+  isRed?: boolean
 }
 
 export const ButtonIcon = ({
@@ -13,6 +14,7 @@ export const ButtonIcon = ({
   Icon,
   handleClick,
   disabled = false,
+  isRed = false,
 }: ButtonIconProps) => {
   const runClickEvent = (e: MouseEvent<HTMLButtonElement>) => {
     if (handleClick) {
@@ -22,11 +24,17 @@ export const ButtonIcon = ({
 
   return (
     <button
-      className='group relative flex h-12 select-none items-center justify-center overflow-hidden rounded-lg bg-app-primary pl-4 pr-10 text-lg font-bold text-app-text disabled:pointer-events-none disabled:bg-app-backgroundDisabled'
+      className={`group relative flex h-12 select-none items-center justify-center overflow-hidden rounded-lg bg-app-primary pl-4 pr-10 text-lg font-bold text-app-text disabled:pointer-events-none disabled:bg-app-backgroundDisabled ${
+        isRed && 'bg-app-primary'
+      }`}
       onClick={runClickEvent}
       disabled={disabled}
     >
-      <div className='absolute inset-0 w-0 bg-app-success transition-all duration-[250ms] ease-out group-hover:w-full'></div>
+      <div
+        className={`absolute inset-0 w-0 bg-app-success transition-all duration-[250ms] ease-out group-hover:w-full ${
+          isRed && 'bg-app-error'
+        }`}
+      ></div>
       <span className='relative text-center group-hover:text-white'>
         {label}
       </span>

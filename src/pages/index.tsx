@@ -11,6 +11,8 @@ import type { WordsLibrary } from '../lib/words'
 import { getNewWord } from '../lib/words'
 import { FiRefreshCcw } from 'react-icons/fi'
 import { FaUnlockAlt } from 'react-icons/fa'
+import { GiSpyglass } from 'react-icons/gi'
+import { trpc } from '../utils/trpc'
 
 const languageOptions: ListBoxOption[] = [
   {
@@ -28,10 +30,18 @@ const languageOptions: ListBoxOption[] = [
 const Home: NextPage = () => {
   //const [language, setLanguage] = useState<WordsLibrary>('EN')
   const [revealWord, setRevealWord] = useState(false)
+  const [showDefinition, setShowDefinition] = useState(false)
   const [wordToGuess, setWordToGuess] = useState('')
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const [selectedLanguage, setSelectedLanguage] = useState(languageOptions[0]!)
+  const { data, isLoading } = trpc.define.getDefinition.useQuery(
+    { language: selectedLanguage.id as WordsLibrary, word: wordToGuess },
+    {
+      refetchInterval: 1000 * 60 * 15, //15mins
+      refetchOnWindowFocus: false,
+    },
+  )
 
   const correctGuesses = guessedLetters.filter((letter) =>
     wordToGuess.includes(letter),
@@ -55,6 +65,7 @@ const Home: NextPage = () => {
 
   const requestNewWord = () => {
     setRevealWord(false)
+    setShowDefinition(false)
     setGuessedLetters([])
     setWordToGuess(
       getNewWord(selectedLanguage?.id as WordsLibrary, wordToGuess),
@@ -63,6 +74,9 @@ const Home: NextPage = () => {
 
   const handleRevealWord = () => {
     setRevealWord(true)
+  }
+  const handleShowDefinition = () => {
+    setShowDefinition(true)
   }
 
   //get first word on render
@@ -75,7 +89,6 @@ const Home: NextPage = () => {
     <>
       <Seo />
       <main className='mx-auto flex w-full max-w-4xl flex-1 flex-col items-center gap-8 p-4'>
-        <h1 className=''>The Hangman Game</h1>
         <div className='relative flex items-center gap-2'>
           <label>Words library:</label>
           <ListBox
@@ -91,11 +104,24 @@ const Home: NextPage = () => {
             handleClick={requestNewWord}
           />
           <ButtonIcon
+            label='Definition'
+            Icon={GiSpyglass}
+            handleClick={handleShowDefinition}
+            disabled={isLoser || isWinner || isLoading}
+          />
+          <ButtonIcon
             label='Reveal'
+            isRed
             Icon={FaUnlockAlt}
             handleClick={handleRevealWord}
             disabled={isLoser || isWinner}
           />
+        </div>
+        <div
+          className={`flex gap-1 ${showDefinition ? 'visible' : 'invisible'}`}
+        >
+          <span className='font-bold text-app-primary'>Definition:</span>
+          <span className=''>{data?.definition}</span>
         </div>
         <Hangman numberOfGuesses={incorrectGuesses.length} />
         <HiddenWord
