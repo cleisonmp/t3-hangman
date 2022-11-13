@@ -49,7 +49,8 @@ const Home: NextPage = () => {
   const incorrectGuesses = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter),
   )
-  const isLoser = incorrectGuesses.length >= 6 || revealWord
+  const totalOfIncorrectGuesses = incorrectGuesses.length
+  const isLoser = totalOfIncorrectGuesses >= 6 || revealWord
   const isWinner = wordToGuess
     .split('')
     .every((letter) => guessedLetters.includes(letter))
@@ -104,10 +105,12 @@ const Home: NextPage = () => {
             handleClick={requestNewWord}
           />
           <ButtonIcon
-            label='Definition'
+            label='Help'
             Icon={GiSpyglass}
             handleClick={handleShowDefinition}
-            disabled={isLoser || isWinner || isLoading}
+            disabled={
+              isLoser || isWinner || isLoading || totalOfIncorrectGuesses < 4
+            }
           />
           <ButtonIcon
             label='Reveal'
@@ -123,7 +126,7 @@ const Home: NextPage = () => {
           <span className='font-bold text-app-primary'>Definition:</span>
           <span className=''>{data?.definition}</span>
         </div>
-        <Hangman numberOfGuesses={incorrectGuesses.length} />
+        <Hangman numberOfGuesses={totalOfIncorrectGuesses} />
         <HiddenWord
           wordToGuess={wordToGuess}
           guessedLetters={correctGuesses}

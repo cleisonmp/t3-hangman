@@ -1,3 +1,5 @@
+import { normalizeString } from '../../utils/normalizeString'
+
 const englishWords = [
   'able',
   'about',
@@ -1649,6 +1651,8 @@ export const getNewWord = (language: WordsLibrary, excludes?: string) => {
   const words = language === 'EN' ? englishWords : portugueseWords
   const wordsWithoutExcludes = words.filter((word) => word !== excludes)
   const totalWordCount = wordsWithoutExcludes.length - 10
-
-  return wordsWithoutExcludes[Math.floor(Math.random() * totalWordCount)] ?? ''
+  const newWord =
+    wordsWithoutExcludes[Math.floor(Math.random() * totalWordCount)] ?? ''
+  const normalizedResult = normalizeString(newWord)
+  return normalizedResult
 }
