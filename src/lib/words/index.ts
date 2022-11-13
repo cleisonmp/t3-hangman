@@ -1653,6 +1653,6 @@ export const getNewWord = (language: WordsLibrary, excludes?: string) => {
   const totalWordCount = wordsWithoutExcludes.length - 10
   const newWord =
     wordsWithoutExcludes[Math.floor(Math.random() * totalWordCount)] ?? ''
-  const normalizedResult = normalizeString(newWord)
+  const normalizedResult = normalizeString(newWord).toLowerCase()
   return normalizedResult
 }
